@@ -5,12 +5,14 @@ public class WeatherItem {
     private String temperature;
     private String wind;
     private String pressure;
+    private String iconUrl;  // нове поле
 
-    public WeatherItem(String dateTime, String temperature, String wind, String pressure) {
+    public WeatherItem(String dateTime, String temperature, String wind, String pressure, String iconUrl) {
         this.dateTime = dateTime;
         this.temperature = temperature;
         this.wind = wind;
         this.pressure = pressure;
+        this.iconUrl = iconUrl;
     }
 
     public String getDateTime() {
@@ -27,5 +29,9 @@ public class WeatherItem {
 
     public String getPressure() {
         return pressure;
+    }
+
+    public String getIconUrl() {
+        return iconUrl;
     }
 }

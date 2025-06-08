@@ -3,10 +3,13 @@ package com.example.myapplication;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -20,6 +23,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView dateView, tempView, windView, pressureView;
+        ImageView weatherIcon;  // додано поле для картинки
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -27,6 +31,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
             tempView = itemView.findViewById(R.id.textTemp);
             windView = itemView.findViewById(R.id.textWind);
             pressureView = itemView.findViewById(R.id.textPressure);
+            weatherIcon = itemView.findViewById(R.id.imageWeatherIcon); // ініціалізація ImageView
         }
     }
 
@@ -45,6 +50,11 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
         holder.tempView.setText("Температура: " + item.getTemperature());
         holder.windView.setText("Вітер: " + item.getWind());
         holder.pressureView.setText("Тиск: " + item.getPressure());
+
+        // Завантаження іконки через Glide
+        Glide.with(holder.itemView.getContext())
+                .load(item.getIconUrl())
+                .into(holder.weatherIcon);
     }
 
     @Override

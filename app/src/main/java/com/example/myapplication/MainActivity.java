@@ -87,6 +87,12 @@ public class MainActivity extends AppCompatActivity {
                 double windSpeed = day.getDouble("wind_speed");
                 int pressure = day.getInt("pressure");
 
+                // Парсимо масив погоди, щоб отримати іконку
+                JSONArray weatherArray = day.getJSONArray("weather");
+                JSONObject weather = weatherArray.getJSONObject(0);
+                String icon = weather.getString("icon");
+                String iconUrl = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
+
                 SimpleDateFormat sdf = new SimpleDateFormat("dd MMM, EEEE", new Locale("uk"));
                 String dateStr = sdf.format(new Date(dt));
 
@@ -94,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 String windStr = windSpeed + " м/с";
                 String pressureStr = pressure + " гПа";
 
-                weatherItems.add(new WeatherItem(dateStr, temperature, windStr, pressureStr));
+                weatherItems.add(new WeatherItem(dateStr, temperature, windStr, pressureStr, iconUrl));
             }
 
             new Handler(Looper.getMainLooper()).post(() -> adapter.notifyDataSetChanged());
